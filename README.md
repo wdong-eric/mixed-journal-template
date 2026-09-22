@@ -23,6 +23,11 @@ An unofficial writing template for manuscripts, research notes and preprints, co
 - Superscript numerical citations through `natbib`, with sorting and compression within citation lists, plus coloured hyperlinks.
 - Compact captions, an optional running header at the upper left and page numbers at the lower right.
 
+With `revtexheadings`, references include the full hierarchy: write
+`Section~\ref{sec:label}` for, e.g., Section I.A.2, or
+`Appendix~\ref{app:label}` for Appendix B.1. Heading labels remain local
+(`I.`, `A.`, `2.`); after `\appendix`, they use `B.`, `1.`, `a.`.
+
 These are template design choices, not official Nature production specifications.
 Leading is the baseline-to-baseline distance; no global line-spacing multiplier
 is applied.

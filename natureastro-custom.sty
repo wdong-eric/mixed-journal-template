@@ -168,6 +168,9 @@
 \renewcommand{\thesection}{\Roman{section}}
 \renewcommand{\thesubsection}{\Alph{subsection}}
 \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+% References include parent numbers; headings keep their local labels.
+\renewcommand{\p@subsection}{\thesection.}
+\renewcommand{\p@subsubsection}{\thesection.\thesubsection.}
 
 \AddToHook{cmd/appendix/after}{%
   \renewcommand{\thesubsection}{\arabic{subsection}}%
