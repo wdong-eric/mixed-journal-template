@@ -9,14 +9,16 @@
 \DeclareOption{authoryear}{\NAauthoryeartrue}
 
 % Nature-like headings are the default.
-% Use [revtexheadings] for APS/REVTeX-style numbered headings.
-\newif\ifNArevtexheadings
-\NArevtexheadingsfalse
+% REVTeX styling applies through the selected level; bare option means all three.
+\newcount\NArevtexdepth
+\NArevtexdepth=0
+\DeclareOption{revtexheadings}{\NArevtexdepth=3}
+\DeclareOption{revtexheadings=section}{\NArevtexdepth=1}
+\DeclareOption{revtexheadings=subsection}{\NArevtexdepth=2}
+\DeclareOption{revtexheadings=subsubsection}{\NArevtexdepth=3}
+\DeclareOption{natureheadings}{\NArevtexdepth=0}
 
-\DeclareOption{revtexheadings}{\NArevtexheadingstrue}
-\DeclareOption{natureheadings}{\NArevtexheadingsfalse}
-
-\ProcessOptions\relax
+\ProcessOptions*\relax
 
 % Load the REVTeX grid utilities before amsmath, booktabs and hyperref.
 \def\class@name{article}
@@ -157,7 +159,20 @@
 % Section headings
 % ============================================================
 
-\ifNArevtexheadings
+% Nature styling is the baseline; override only the selected upper levels.
+\titleformat{\section}
+{\bfseries\fontsize{9.4}{10.8}\selectfont}{}{0pt}{}
+\titlespacing*{\section}{0pt}{1.15em}{0.35em}
+
+\titleformat{\subsection}
+{\bfseries\fontsize{8.7}{10.1}\selectfont}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{1.0em}{0.25em}
+
+\titleformat{\subsubsection}
+{\itshape\fontsize{8.3}{9.6}\selectfont}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.2em}
+
+\ifnum\NArevtexdepth>0
 % ----------------------------------------------------------
 % APS/REVTeX-inspired section hierarchy
 % ----------------------------------------------------------
@@ -185,6 +200,7 @@
 {0pt}{0.8cm plus 1ex minus 0.2ex}{0.5cm}
 
 % Level 2: centred and bold.
+\ifnum\NArevtexdepth>1
 \titleformat{\subsection}
 {\normalfont\fontsize{8.7}{10.1}\selectfont\bfseries\centering}{\thesubsection.}{0.6em}{}
 
@@ -192,36 +208,15 @@
 {0pt}{0.8cm plus 1ex minus 0.2ex}{0.5cm}
 
 % Level 3: centred and italic.
+\ifnum\NArevtexdepth>2
 \titleformat{\subsubsection}
 {\normalfont\fontsize{8.3}{9.6}\selectfont\itshape\centering}{\thesubsubsection.}{0.6em}{}
 
 \titlespacing*{\subsubsection}
 {0pt}{0.8cm plus 1ex minus 0.2ex}{0.5cm}
 
-\else
-% ----------------------------------------------------------
-% Nature Astronomy-inspired section hierarchy
-% ----------------------------------------------------------
-\titleformat{\section}
-{\bfseries\fontsize{9.4}{10.8}\selectfont}{}{0pt}{}
-
-\titlespacing*{\section}
-{0pt}{1.15em}{0.35em}
-
-\titleformat{\subsection}
-{\bfseries\fontsize{8.7}{10.1}\selectfont}
-{}{0pt}{}
-
-\titlespacing*{\subsection}
-{0pt}{1.0em}{0.25em}
-
-\titleformat{\subsubsection}
-{\itshape\fontsize{8.3}{9.6}\selectfont}
-{}{0pt}{}
-
-\titlespacing*{\subsubsection}
-{0pt}{0.8em}{0.2em}
-
+\fi
+\fi
 \fi
 
 % ============================================================

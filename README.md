@@ -23,7 +23,7 @@ An unofficial writing template for manuscripts, research notes and preprints, co
 - Superscript numerical citations through `natbib`, with sorting and compression within citation lists, plus coloured hyperlinks.
 - Compact captions, an optional running header at the upper left and page numbers at the lower right.
 
-With `revtexheadings`, references include the full hierarchy: write
+With any `revtexheadings` option, references include the full hierarchy: write
 `Section~\ref{sec:label}` for, e.g., Section I.A.2, or
 `Appendix~\ref{app:label}` for Appendix B.1. Heading labels remain local
 (`I.`, `A.`, `2.`); after `\appendix`, they use `B.`, `1.`, `a.`.
@@ -49,7 +49,29 @@ Nature's [Extended Data table guidance](https://research-figure-guide.nature.com
 specifies 7 pt sans-serif text for that particular use. This template's 7.2 pt
 serif tables are an approximation suited to its existing typography.
 
-To use the alternative Nature-inspired headings without displayed numbers, replace the package line with:
+Choose how far down the hierarchy REVTeX styling applies:
+
+| Package option | REVTeX-styled levels |
+| --- | --- |
+| `natureheadings` (default) | None |
+| `revtexheadings=section` | Section |
+| `revtexheadings=subsection` | Section and subsection |
+| `revtexheadings=subsubsection` or `revtexheadings` | All three levels |
+
+For example, to use REVTeX sections and subsections with Nature-style
+subsubsections:
+
+```latex
+\usepackage[revtexheadings=subsection]{natureastro-custom}
+```
+
+Lower levels keep the compact, left-aligned Nature styling without displayed
+numbers. Their counters still contribute to full references such as `I.A.2`
+and `B.1.a`. This also applies in appendices. If multiple heading options are
+supplied, the last one wins. The `authoryear` option can be combined with any
+heading choice.
+
+To use Nature-inspired headings at every level, use:
 
 ```latex
 \usepackage[natureheadings]{natureastro-custom}
