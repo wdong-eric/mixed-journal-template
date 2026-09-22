@@ -18,6 +18,10 @@
 
 \ProcessOptions\relax
 
+% Load the REVTeX grid utilities before amsmath, booktabs and hyperref.
+\def\class@name{article}
+\RequirePackage{ltxgrid}
+
 % ============================================================
 % Page geometry
 % ============================================================
@@ -87,7 +91,6 @@
 \RequirePackage{fancyhdr}
 % Load hyperlinks after the other style-level packages.
 \RequirePackage{hyperref}
-\RequirePackage{cuted}
 
 % ============================================================
 % Global spacing and layout
@@ -101,14 +104,38 @@
 % ============================================================
 % Full-width text in two-column layout
 % ============================================================
-% REVTeX-like widetext environment implemented using cuted.
-% Intended primarily for wide equations and aligned expressions.
-\setlength{\stripsep}{10pt plus 2pt minus 2pt}
+% Adapted from REVTeX 4.2f widetext@grid (LPPL 1.3c or later).
+% Original authors: Arthur Ogawa and the REVTeX maintainers.
+% Keep REVTeX's grid transitions, guide rules and spacing.
+\newbox\na@widetext@top
+\newbox\na@widetext@bot
 \newenvironment{widetext}
-{
-\begin{strip}}
-  {
-\end{strip}}
+{%
+  \par\ignorespaces
+  \setbox\na@widetext@top\vbox{%
+    \hb@xt@\hsize{\leaders\hrule\hfil\vrule\@height6\p@}%
+  }%
+  \setbox\na@widetext@bot\hb@xt@\hsize{%
+    \vrule\@depth6\p@\leaders\hrule\hfil
+  }%
+  \onecolumngrid
+  \vskip10\p@
+  \dimen@\ht\na@widetext@top\advance\dimen@\dp\na@widetext@top
+  \cleaders\box\na@widetext@top\vskip\dimen@
+  \vskip6\p@
+  \prep@math@patch
+}
+{%
+  \par\vskip6\p@
+  \setbox\na@widetext@bot\vbox{%
+    \hb@xt@\hsize{\hfil\box\na@widetext@bot}%
+  }%
+  \dimen@\ht\na@widetext@bot\advance\dimen@\dp\na@widetext@bot
+  \cleaders\box\na@widetext@bot\vskip\dimen@
+  \vskip8.5\p@
+  \twocolumngrid\ignorespacesafterend
+  \@endpetrue
+}
 
 % ============================================================
 % Colour and hyperlinks
@@ -199,7 +226,7 @@
 % ============================================================
 % Body and reference typography
 % ============================================================
-\AtBeginDocument{\fontsize{8.25}{10.05}\selectfont}
+\AtBeginDocument{\fontsize{8.25}{10.05}\selectfont\twocolumngrid}
 \AtBeginEnvironment{thebibliography}{\fontsize{7.25}{8.35}\selectfont}
 
 \makeatletter
@@ -227,19 +254,20 @@
 % Title block
 % ============================================================
 \renewcommand{\maketitle}{%
-  \twocolumn[{%
-      \begin{@twocolumnfalse}
-        % \namasthead
-        \begin{minipage}[t]{0.74\textwidth}
-          {\fontsize{20.5}{23.0}\selectfont\bfseries\raggedright \@title\par}
-          \vspace{3.5mm}
-          {\fontsize{9.0}{11.0}\selectfont\raggedright \@author\par}
-          \vspace{4.5mm}
-          {\fontsize{10.1}{12.5}\selectfont\raggedright \@abstract\par}
-        \end{minipage}
-        \vspace{6mm}
-      \end{@twocolumnfalse}
-  }]
+  \onecolumngrid
+  \begingroup
+    \noindent
+    % \namasthead
+    \begin{minipage}[t]{0.74\textwidth}
+      {\fontsize{20.5}{23.0}\selectfont\bfseries\raggedright \@title\par}
+      \vspace{3.5mm}
+      {\fontsize{9.0}{11.0}\selectfont\raggedright \@author\par}
+      \vspace{4.5mm}
+      {\fontsize{10.1}{12.5}\selectfont\raggedright \@abstract\par}
+    \end{minipage}
+    \par\vspace{6mm}
+  \endgroup
+  \twocolumngrid
   \thispagestyle{fancy}
 }
 

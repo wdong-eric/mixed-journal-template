@@ -67,7 +67,9 @@ The style loads `amsmath`, `amssymb`, `bm` and `upgreek`, and defines these math
 | `\mat{A}` | Bold upright matrix via `\mathbf` |
 | `\tens{T}` | Bold upright tensor via `\mathbf` |
 
-Use `widetext` for equations that span both columns:
+Use `widetext` for equations that span both columns, with two-column text
+continuing above and below the display. Short REVTeX-style rules at the upper
+left and lower right mark the reading flow:
 
 ```latex
 \begin{widetext}
@@ -77,7 +79,26 @@ Use `widetext` for equations that span both columns:
 \end{widetext}
 ```
 
-This environment uses `cuted`. Use standard `figure` and `table` environments for one column, or `figure*` and `table*` for floats spanning both columns. The style already loads `graphicx`, `booktabs`, `tabularx` and `array`.
+The environment adapts REVTeX 4.2's `widetext` implementation and uses its
+`ltxgrid` package (which loads `ltxutil`) to balance the preceding columns,
+switch to full width and resume two-column text. These packages are included
+in the REVTeX bundle in TeX Live. The document still uses the `article` class.
+
+Guide rules and spacing follow REVTeX: 10 pt before the upper rule, 6 pt
+between each rule and the wide content, and 8.5 pt after the lower rule.
+Equation environments add their own display spacing. Text immediately after
+`\end{widetext}` continues without indentation; a blank line starts a normal
+paragraph.
+
+Place `widetext` directly in the document body, outside floats, lists and
+minipages. The custom title block also uses the grid commands. For explicit
+column changes, use `\onecolumngrid` and `\twocolumngrid`, rather than the
+standard `\onecolumn` and `\twocolumn` commands. The example manuscript includes
+a numbered, aligned wide display with a cross-reference.
+
+Use standard `figure` and `table` environments for one column, or `figure*` and
+`table*` for floats spanning both columns. The style already loads `graphicx`,
+`booktabs`, `tabularx` and `array`.
 
 ## References
 

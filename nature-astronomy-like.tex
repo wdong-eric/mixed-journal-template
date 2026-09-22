@@ -30,6 +30,29 @@ The principal body is set in two columns with narrow gutters. Section headings a
 \end{equation}
 where $\boldsymbol{\eta}$ denotes a stochastic forcing term.
 
+For an equation that needs both columns, the \texttt{widetext} environment
+interrupts the two-column flow with a full-width display:
+\begin{widetext}
+  \begin{equation}
+    \label{eq:wide}
+    \begin{aligned}
+      \vect{x}(t)
+      &= \exp\!\left[\mat{A}(t-t_0)\right]\vect{x}(t_0)
+      + \int_{t_0}^{t}\exp\!\left[\mat{A}(t-s)\right]\vect{\eta}(s)\,\mathrm{d}s,\\
+      \mat{C}(t,t')
+      &= \exp\!\left[\mat{A}(t-t_0)\right]\mat{C}_0
+      \exp\!\left[\mat{A}^{\mathsf{T}}(t'-t_0)\right]
+      + \int_{t_0}^{\min(t,t')}\exp\!\left[\mat{A}(t-s)\right]
+      \mat{Q}\exp\!\left[\mat{A}^{\mathsf{T}}(t'-s)\right]\,\mathrm{d}s.
+    \end{aligned}
+  \end{equation}
+\end{widetext}
+Here $\mat{A}$ is a constant linear evolution matrix, $\mat{C}_0$ is the
+initial covariance, and $\mat{Q}$ is the covariance intensity of zero-mean
+white noise independent of the initial state, with $t,t'\geq t_0$.
+Text resumes in two columns after equation~\ref{eq:wide}; the short rules
+mark the transition into and out of the wide display.
+
 \begin{figure}[t]
   \centering
   \fbox{\rule{0pt}{35mm}\rule{0.94\columnwidth}{0pt}}
