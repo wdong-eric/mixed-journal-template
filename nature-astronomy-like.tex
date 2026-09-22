@@ -1,0 +1,88 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[revtexheadings]{natureastro-custom}
+
+\title{A Nature Astronomy-inspired manuscript in \LaTeX}
+\author{First Author$^{1}$, Second Author$^{2}$ \& Third Author$^{1}$}
+% \runninghead{First Author et al.}
+
+\begin{abstract}
+  This unofficial template is intended for writing manuscripts, notes and polished preprints in a visual style inspired by Nature Astronomy. It keeps the useful parts of the published layout---a full-width title and abstract, restrained sans-serif typography, compact two-column text, superscript numerical citations and concise captions---without production-only metadata such as received, accepted or publication dates, DOI information or volume details.
+\end{abstract}
+
+\affiliations{%
+  $^{1}$School of Physics, University of Example, Melbourne, VIC, Australia.\\
+$^{2}$Institute for Astronomy, Example University, Example City, Country.}
+\correspondence{corresponding.author@example.edu}
+
+\begin{document}
+\maketitle
+
+A manuscript can begin directly with the scientific narrative rather than with a heading labelled ``Introduction''. The opening paragraphs should establish the context, identify the unresolved problem and state the contribution succinctly. Citations appear as numerical superscripts in order of appearance.\cite{einstein1916,shakura1973}
+
+This file is deliberately a clean authoring template rather than a simulation of the journal's production workflow. Its purpose is to make drafts pleasant to read while keeping the source conventional and easy to adapt later.
+
+\section{Results}
+\subsection{A compact two-column hierarchy}
+The principal body is set in two columns with narrow gutters. Section headings are compact and bold. Displayed equations use conventional mathematical typography while the surrounding prose remains sans serif:
+\begin{equation}
+  \frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t}
+  = \boldsymbol{f}(\boldsymbol{x},t) + \boldsymbol{\eta}(t),
+\end{equation}
+where $\boldsymbol{\eta}$ denotes a stochastic forcing term.
+
+\begin{figure}[t]
+  \centering
+  \fbox{\rule{0pt}{35mm}\rule{0.94\columnwidth}{0pt}}
+  \caption{\textbf{Example single-column figure.} Replace the framed placeholder with \texttt{\textbackslash includegraphics}. Captions should explain symbols and uncertainties sufficiently for the figure to be interpreted without repeatedly returning to the main text.}
+  \label{fig:example}
+\end{figure}
+
+Figure~\ref{fig:example} illustrates the default single-column treatment. For a figure spanning the whole page width, use the standard \texttt{figure*} environment.
+
+\subsection{Tables}
+\begin{table}[t]
+  \caption{Example compact table}
+  \centering
+  \begin{tabular}{lcc}
+    \toprule
+    Quantity & Symbol & Value \\
+    \midrule
+    Spin frequency & $\nu$ & 100\,Hz \\
+    Timescale & $\tau$ & 10\,d \\
+    Fraction & $x$ & 0.10 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Discussion}
+Use the layout as a writing environment for a manuscript, internal draft, research note or preprint. The source remains ordinary \LaTeX{}, so the manuscript can later be transferred to a journal-specific template without restructuring the content.
+
+\methods
+Methods can continue in the same two-column format. For a real manuscript, place sufficient implementation detail here to reproduce the analysis, together with statistical conventions, software versions and selection criteria.
+
+\dataavailability
+State where the data underlying the study can be obtained, if this section is useful for the document.
+
+\codeavailability
+State where analysis code is archived, if applicable.
+
+\acknowledgements
+Acknowledge funding, facilities, collaborations and other contributions as needed.
+
+\authorcontributions
+F.A. conceived the study. F.A. and S.A. performed the analysis. All authors discussed the results and contributed to the manuscript.
+
+\competinginterests
+The authors declare no competing interests.
+
+\begin{thebibliography}{9}
+  \bibitem{einstein1916}
+  Einstein, A. The foundation of the general theory of relativity. \textit{Ann. Phys.} \textbf{49}, 769--822 (1916).
+
+  \bibitem{shakura1973}
+  Shakura, N. I. \& Sunyaev, R. A. Black holes in binary systems. Observational appearance. \textit{Astron. Astrophys.} \textbf{24}, 337--355 (1973).
+\end{thebibliography}
+% \bibliographystyle{aasjournalv7}
+
+\makeendmatter
+\end{document}
