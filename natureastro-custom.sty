@@ -3,6 +3,11 @@
 % ============================================================
 % Package options
 % ============================================================
+\newif\ifNAauthoryear
+\NAauthoryearfalse
+
+\DeclareOption{authoryear}{\NAauthoryeartrue}
+
 % Nature-like headings are the default.
 % Use [revtexheadings] for APS/REVTeX-style numbered headings.
 \newif\ifNArevtexheadings
@@ -59,9 +64,19 @@
 \RequirePackage{enumitem}
 
 % ============================================================
-% Citations
+% Citations and bibliography
 % ============================================================
+\ifNAauthoryear
+% AAS/ApJ-style author-year citations.
+\RequirePackage[authoryear,round]{natbib}
+\else
+% Nature-style numerical superscript citations.
 \RequirePackage[super,sort&compress]{natbib}
+\fi
+% Bibliography heading and typography.
+\renewcommand{\bibsection}{
+\section*{References}}
+\renewcommand{\bibfont}{\fontsize{7.15}{8.25}\selectfont}
 
 % ============================================================
 % Document utilities
@@ -262,10 +277,4 @@
 \newcommand{\competinginterests}{
 \section*{Competing interests}}
 
-% ============================================================
-% Bibliography
-% ============================================================
-\renewcommand{\bibsection}{
-\section*{References}}
-\renewcommand{\bibfont}{\fontsize{7.15}{8.25}\selectfont}
 \makeatother
