@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{natureastro-look}[2026/09/22 Unofficial Nature Astronomy-inspired writing layout]
+\ProvidesPackage{natureastro-custom}[2026/09/22 Unofficial Nature Astronomy-inspired writing layout]
 % ============================================================
 % Package options
 % ============================================================
@@ -80,7 +80,7 @@
 % Bibliography heading and typography.
 \renewcommand{\bibsection}{
 \section*{References}}
-\renewcommand{\bibfont}{\fontsize{7.15}{8.25}\selectfont}
+\renewcommand{\bibfont}{\fontsize{7.1}{8.3}\selectfont}
 
 % ============================================================
 % Document utilities
@@ -95,7 +95,6 @@
 % ============================================================
 % Global spacing and layout
 % ============================================================
-\linespread{0.96}
 \setlength{\columnsep}{5.2mm}
 \setlength{\parindent}{1em}
 \setlength{\parskip}{0pt}
@@ -170,23 +169,28 @@
 \renewcommand{\thesubsection}{\Alph{subsection}}
 \renewcommand{\thesubsubsection}{\arabic{subsubsection}}
 
+\AddToHook{cmd/appendix/after}{%
+  \renewcommand{\thesubsection}{\arabic{subsection}}%
+  \renewcommand{\thesubsubsection}{\alph{subsubsection}}%
+}
+
 % Level 1: centred, bold, uppercase.
 \titleformat{\section}
-{\normalfont\small\bfseries\centering}{\thesection.}{0.6em}{\MakeUppercase}
+{\normalfont\fontsize{9.4}{10.8}\selectfont\bfseries\centering}{\thesection.}{0.6em}{\MakeUppercase}
 
 \titlespacing*{\section}
 {0pt}{0.8cm plus 1ex minus 0.2ex}{0.5cm}
 
 % Level 2: centred and bold.
 \titleformat{\subsection}
-{\normalfont\small\bfseries\centering}{\thesubsection.}{0.6em}{}
+{\normalfont\fontsize{8.7}{10.1}\selectfont\bfseries\centering}{\thesubsection.}{0.6em}{}
 
 \titlespacing*{\subsection}
 {0pt}{0.8cm plus 1ex minus 0.2ex}{0.5cm}
 
 % Level 3: centred and italic.
 \titleformat{\subsubsection}
-{\normalfont\small\itshape\centering}{\thesubsubsection.}{0.6em}{}
+{\normalfont\fontsize{8.3}{9.6}\selectfont\itshape\centering}{\thesubsubsection.}{0.6em}{}
 
 \titlespacing*{\subsubsection}
 {0pt}{0.8cm plus 1ex minus 0.2ex}{0.5cm}
@@ -220,14 +224,21 @@
 % ============================================================
 % Figure and table captions
 % ============================================================
-\DeclareCaptionFont{nasize}{\fontsize{7.4}{8.8}\selectfont}
+\DeclareCaptionFont{nasize}{\fontsize{7.3}{8.7}\selectfont}
 \captionsetup{font=nasize,labelfont=bf,labelsep=period,justification=justified,singlelinecheck=false,skip=4pt}
 
 % ============================================================
-% Body and reference typography
+% Body, table and reference typography
 % ============================================================
-\AtBeginDocument{\fontsize{8.25}{10.05}\selectfont\twocolumngrid}
-\AtBeginEnvironment{thebibliography}{\fontsize{7.25}{8.35}\selectfont}
+% Compact Nature-inspired sizes, with explicit leading and no global scaling.
+% Keep the class's other size-dependent settings and override only typography.
+\AddToHook{cmd/normalsize/after}{\fontsize{8.5}{10.2}\selectfont}
+\AddToHook{cmd/small/after}{\fontsize{7.2}{8.5}\selectfont}
+\AddToHook{cmd/footnotesize/after}{\fontsize{7}{8.4}\selectfont}
+\AddToHook{begindocument/end}{\normalsize\twocolumngrid}
+% Apply the table size after the float's normal-font reset.
+\AtBeginEnvironment{table}{\appto\@floatboxreset{\small}}
+\AtBeginEnvironment{table*}{\appto\@floatboxreset{\small}}
 
 \makeatletter
 % ============================================================
@@ -256,16 +267,16 @@
 \renewcommand{\maketitle}{%
   \onecolumngrid
   \begingroup
-    \noindent
-    % \namasthead
-    \begin{minipage}[t]{0.74\textwidth}
-      {\fontsize{20.5}{23.0}\selectfont\bfseries\raggedright \@title\par}
-      \vspace{3.5mm}
-      {\fontsize{9.0}{11.0}\selectfont\raggedright \@author\par}
-      \vspace{4.5mm}
-      {\fontsize{10.1}{12.5}\selectfont\raggedright \@abstract\par}
-    \end{minipage}
-    \par\vspace{6mm}
+  \noindent
+  % \namasthead
+  \begin{minipage}[t]{0.74\textwidth}
+    {\fontsize{20.5}{23.0}\selectfont\bfseries\raggedright \@title\par}
+    \vspace{3.5mm}
+    {\fontsize{9.0}{11.0}\selectfont\raggedright \@author\par}
+    \vspace{4.5mm}
+    {\fontsize{10.1}{12.3}\selectfont\raggedright \@abstract\par}
+  \end{minipage}
+  \par\vspace{6mm}
   \endgroup
   \twocolumngrid
   \thispagestyle{fancy}

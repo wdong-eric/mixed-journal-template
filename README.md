@@ -17,11 +17,32 @@ An unofficial writing template for manuscripts, research notes and preprints, co
 ```
 
 - A4, two columns, 17 mm top/side margins, 18 mm bottom margin and a 5.2 mm column gap.
-- Palatino-style serif text and matching mathematics through `newpxtext` and `newpxmath`. The style sets body text to 8.25 pt with 10.05 pt leading, overriding the class's nominal 10 pt size.
+- Palatino-style serif text and matching mathematics through `newpxtext` and `newpxmath`, with a compact Nature-inspired size hierarchy. The default footnote separator treatment is retained.
 - A title/author/abstract block above both columns, with its contents occupying 74% of the text width. The journal masthead is disabled.
 - REVTeX-inspired headings: Roman-numbered, centred uppercase sections; lettered, centred bold subsections; and Arabic-numbered, centred italic subsubsections.
 - Superscript numerical citations through `natbib`, with sorting and compression within citation lists, plus coloured hyperlinks.
 - Compact captions, an optional running header at the upper left and page numbers at the lower right.
+
+These are template design choices, not official Nature production specifications.
+Leading is the baseline-to-baseline distance; no global line-spacing multiplier
+is applied.
+
+| Element | Font size / leading (pt) |
+| --- | --- |
+| Body | 8.5 / 10.2 |
+| Tables | 7.2 / 8.5 |
+| Footnotes | 7 / 8.4 |
+| Captions | 7.3 / 8.7 |
+| References | 7.1 / 8.3 |
+| Sections | 9.4 / 10.8, bold |
+| Subsections | 8.7 / 10.1, bold |
+| Subsubsections | 8.3 / 9.6, italic |
+| Abstract | 10.1 / 12.3 |
+| Title | 20.5 / 23 |
+
+Nature's [Extended Data table guidance](https://research-figure-guide.nature.com/figures/extended-data-formatting-guidelines/)
+specifies 7 pt sans-serif text for that particular use. This template's 7.2 pt
+serif tables are an approximation suited to its existing typography.
 
 To use the alternative Nature-inspired headings without displayed numbers, replace the package line with:
 
